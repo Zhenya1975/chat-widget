@@ -196,7 +196,7 @@
             reply(response);
           } else {
             console.log('Response structure:', response);
-            reply('Sorry, I didn\\'t get a proper response from the server. Check console for details.');
+            reply('Sorry, I didn\'t get a proper response from the server. Check console for details.');
           }
         },
         error: function(xhr, status, error) {
