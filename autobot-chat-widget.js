@@ -1,4 +1,4 @@
-// autobot-chat-widget.js v1.0 - Inline Chat Version
+// autobot-chat-widget.js v1.1 - Inline Chat Version (Fixed)
 // Usage: Include this script and add <div id="autobot-chat-container"></div> where you want the chat
 
 (function() {
@@ -426,7 +426,7 @@
         }
     }
     
-    // Global initialization
+    // FIX: Явное присвоение глобальной переменной
     window.AutoBotChatInline = AutoBotChatInline;
     
 })();
