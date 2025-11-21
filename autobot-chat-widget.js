@@ -1,5 +1,5 @@
-// autobot-chat-widget.js v1.1 - Inline Chat Version (Fixed)
-// Usage: Include this script and add <div id="autobot-chat-container"></div> where you want the chat
+// autobot-chat-widget.js v1.2 - Auto-initialize Version
+// Usage: Just include this script and add <div id="autobot-chat-container"></div>
 
 (function() {
     'use strict';
@@ -20,11 +20,7 @@
         }
         
         init() {
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => this.createChat());
-            } else {
-                this.createChat();
-            }
+            this.createChat();
         }
         
         createChat() {
@@ -39,7 +35,6 @@
             this.applyStyles();
             this.bindEvents();
             
-            // Focus input after a short delay
             setTimeout(() => {
                 const input = document.getElementById('autobotChatInput');
                 if (input) input.focus();
@@ -61,9 +56,7 @@
                     
                     <div class="autobot-chat-messages" id="autobotChatMessages">
                         <div class="autobot-message autobot-ai-message">
-                            <strong>Консультант:</strong> Привет!
-                            Я могу помочь вам с различными вопросами, связанными с AI-помощниками.
-                            О чём хотите поговорить?
+                            <strong>Консультант:</strong> Привет! Я ваш AI-помощник. Чем могу помочь?
                             <div class="autobot-message-time">${this.getCurrentTime()}</div>
                         </div>
                     </div>
@@ -89,8 +82,10 @@
         }
         
         applyStyles() {
+            if (document.getElementById('autobot-chat-styles')) return;
+            
             const styles = `
-                <style>
+                <style id="autobot-chat-styles">
                     .autobot-inline-chat {
                         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         max-width: 800px;
@@ -241,7 +236,6 @@
                         margin-top: 0.5rem;
                     }
                     
-                    /* Scrollbar styling */
                     .autobot-chat-messages::-webkit-scrollbar {
                         width: 6px;
                     }
@@ -260,7 +254,6 @@
                         background: #9b59b6;
                     }
                     
-                    /* Responsive */
                     @media (max-width: 768px) {
                         .autobot-inline-chat {
                             margin: 10px;
@@ -391,9 +384,7 @@
                 const chatMessages = document.getElementById('autobotChatMessages');
                 chatMessages.innerHTML = `
                     <div class="autobot-message autobot-ai-message">
-                        <strong>Консультант:</strong> Привет!
-                        Я могу помочь вам с различными вопросами, связанными с AI-помощниками.
-                        О чём хотите поговорить?
+                        <strong>Консультант:</strong> Чат очищен. Чем могу помочь?
                         <div class="autobot-message-time">${this.getCurrentTime()}</div>
                     </div>
                 `;
@@ -426,7 +417,26 @@
         }
     }
     
-    // FIX: Явное присвоение глобальной переменной
+    // Автоматическая инициализация при загрузке DOM
+    function initializeChat() {
+        const container = document.getElementById('autobot-chat-container');
+        if (container) {
+            new AutoBotChatInline({
+                apiUrl: 'https://kronostech.ru/autopartsbot/api/gigachat/send-message/',
+                clearUrl: 'https://kronostech.ru/autopartsbot/api/gigachat/clear-context/',
+                containerId: 'autobot-chat-container'
+            });
+        }
+    }
+    
+    // Инициализация когда DOM готов
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeChat);
+    } else {
+        initializeChat();
+    }
+    
+    // Экспорт для ручного использования если нужно
     window.AutoBotChatInline = AutoBotChatInline;
     
 })();
