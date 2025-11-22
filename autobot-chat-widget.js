@@ -437,6 +437,6 @@
     }
     
     // Экспорт для ручного использования если нужно
-    window.AutoBotChatInline = AutoBotChatInline;
+    // window.AutoBotChatInline = AutoBotChatInline;
     
 })();
