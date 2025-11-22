@@ -1,5 +1,5 @@
 
-        // autobot-chat-widget.js v1.2 - Auto-initialize Version
+autobot-chat-widget.js v1.4 - Auto-initialize Version
 // Usage: Just include this script and add <div id="autobot-chat-container"></div>
 
 (function() {
