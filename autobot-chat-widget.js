@@ -437,11 +437,12 @@
     // Инициализация когда DOM готов
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initializeChat);
+            console.log('worked init at bottom')
     } else {
         initializeChat();
     }
 
-    // Экспорт для ручного использования если нужно
-    // window.AutoBotChatInline = AutoBotChatInline;
+
+    window.AutoBotChatInline = AutoBotChatInline;
 
 })();
