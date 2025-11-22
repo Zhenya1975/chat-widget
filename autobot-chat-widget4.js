@@ -218,12 +218,15 @@
                         border-radius: 50%;
                         width: 55px;
                         height: 55px;
+                        min-width: 55px; /* Add this to prevent shrinking */
+                        min-height: 55px; /* Add this to prevent shrinking */
                         cursor: pointer;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         transition: all 0.3s;
                         box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+                        flex-shrink: 0; /* Prevent flexbox from shrinking it */
                     }
                     
                     .autobot-send-btn:hover {
